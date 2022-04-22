@@ -3,9 +3,19 @@ package br.com.alura.mvc.mudi.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Pedido {
 
-	private String NomeProduto;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	private String nomeProduto;
 	private BigDecimal valorNegociado;
 	private LocalDate dataDaEntrega;
 	private String urlProduto;
@@ -13,11 +23,11 @@ public class Pedido {
 	private String descricao;
 
 	public String getNomeProduto() {
-		return NomeProduto;
+		return nomeProduto;
 	}
 
-	public void setNomeProduto(String nomeProduto) {
-		NomeProduto = nomeProduto;
+	public void setNomeProduto(String produto) {
+		this.nomeProduto = produto;
 	}
 
 	public BigDecimal getValorNegociado() {
