@@ -1,5 +1,6 @@
 package br.com.alura.mvc.mudi.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,13 @@ public class HomeController {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
-	@GetMapping()
-	public String home(Model model) {
-		
-		List<Pedido>pedidos = pedidoRepository.findAll();
+	@GetMapping
+	public String home(Model model, Principal principal) {
+		List<Pedido> pedidos = pedidoRepository.findAllByUsuario(principal.getName());
 		model.addAttribute("pedidos", pedidos);
-		return"home";
-		
+		return "home";
 	}
+		
 		/*Pedido pedido = new Pedido();
 		pedido.setNomeProduto("Xiaomi Redmi Note 8");
 		pedido.setUrlImagem("https://images-na.ssl-images-amazon.com/images/I/81UgYuadkpL._AC_SL1500_.jpg");
