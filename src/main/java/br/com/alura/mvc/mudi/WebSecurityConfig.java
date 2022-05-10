@@ -21,27 +21,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		.authorizeRequests()
-		.antMatchers("/home/**")
+			.authorizeRequests()
+			.antMatchers("/home/**")
 			.permitAll()
-		.anyRequest()
+			.anyRequest()
 			.authenticated()
-		.and()
-		.formLogin(form -> form
-            .loginPage("/login")
-            .defaultSuccessUrl("/usuario/pedido", true)
-            .permitAll()
-        )
-		.logout(logout -> {
-			logout.logoutUrl("/logout")
-				.logoutSuccessUrl("/home");
-		});
+			.and()
+				.formLogin(form -> form	
+				.loginPage("/login")
+				.defaultSuccessUrl("/usuario/pedido", true)
+				.permitAll()
+				)
+				.logout(logout -> {
+					logout.logoutUrl("/logout")
+					.logoutSuccessUrl("/home");
+				}).csrf()
+				.disable();
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -49,13 +50,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.jdbcAuthentication()
 			.dataSource(dataSource)
 			.passwordEncoder(encoder);
-		
-		//UserDetails user = 
-				//User.builder()
+
+		//UserDetails user = User
+				//.builder()
 				//.username("Maria")
 				//.password(encoder.encode("Maria"))
-				//.roles("ADM")
-				//.build();
+				//.roles("ADM").build();
 
 	}
 }

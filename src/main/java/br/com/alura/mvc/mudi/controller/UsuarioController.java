@@ -26,7 +26,7 @@ public class UsuarioController{
 	public String home(Model model, Principal principal) {
 		List<Pedido>pedidos = pedidoRepository.findAllByUsuario(principal.getName());
 		model.addAttribute("pedidos", pedidos);
-		return "home";
+		return "usuario/home";
 		
 	}
 	
