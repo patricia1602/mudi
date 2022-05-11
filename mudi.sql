@@ -26,10 +26,18 @@ password varchar(200) not null,
 enable boolean not null
 );
 
-create table authorities(
-username varchar(50) not null,
-authority varchar(50) not null,
-constraint  fk_authorities_users foreign key(username) references users(username)
+select * from authorities;
+
+select * from pedido;
+
+insert into pedidos (nome_produto, url_produto, url_imagem, descricao)
+ values('boneca',
+ 'boneca',
+ 'boneca',
+ 'bonita'
 );
 
-create unique index ix_auth_username on authorities(username,authority);
+insert into users ( username, password, enable)
+values('Joao', 'Joao', '1'); 
+
+select * from users;
